@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Join Applications | SKL Yuva Club Admin
+    </title>
+
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- Admin CSS -->
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html" class="active">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+
+            <div>
+
+                <h1>
+                    Join Applications
+                </h1>
+
+                <p>
+                    Manage SKL Yuva Club membership applications
+                </p>
+
+            </div>
+
+
+            <!-- REFRESH -->
+
+            <button type="button" class="admin-btn admin-btn-secondary" id="refreshApplicationsBtn">
+
+                <i class="fas fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="admin-stats-grid">
+
+
+            <!-- TOTAL -->
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+
+                    <i class="fas fa-users"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Applications
+                    </span>
+
+                    <strong id="totalApplications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PENDING -->
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+
+                    <i class="fas fa-clock"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong id="pendingApplications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPROVED -->
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+
+                    <i class="fas fa-circle-check"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Approved
+                    </span>
+
+                    <strong id="approvedApplications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- REJECTED -->
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+
+                    <i class="fas fa-circle-xmark"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Rejected
+                    </span>
+
+                    <strong id="rejectedApplications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="admin-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="admin-search">
+
+                <i class="fas fa-search"></i>
+
+                <input type="search" id="applicationSearch" placeholder="Search by name or mobile...">
+
+            </div>
+
+
+            <!-- FILTER -->
+
+            <select id="applicationFilter" class="admin-filter">
+
+                <option value="all">
+                    All Applications
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             APPLICATION TABLE
+        ================================================== -->
+
+        <div class="admin-table-card">
+
+
+            <div class="table-responsive">
+
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Applicant
+                            </th>
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Occupation
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="applicationsTableBody">
+
+
+                        <tr>
+
+                            <td colspan="6" class="table-loading">
+
+                                <i class="fas fa-spinner fa-spin"></i>
+
+                                Loading applications...
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         VIEW APPLICATION MODAL
+    ====================================================== -->
+
+    <div class="admin-modal" id="applicationModal">
+
+
+        <div class="admin-modal-content">
+
+
+            <!-- HEADER -->
+
+            <div class="modal-header">
+
+
+                <div>
+
+                    <h2>
+                        Application Details
+                    </h2>
+
+                    <p>
+                        Complete membership application
+                    </p>
+
+                </div>
+
+
+                <button type="button" class="modal-close" id="closeApplicationModal">
+
+                    <i class="fas fa-xmark"></i>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- DETAILS -->
+
+            <div class="application-details">
+
+
+                <!-- NAME -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Full Name
+                    </span>
+
+                    <strong id="detailName">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile Number
+                    </span>
+
+                    <strong id="detailPhone">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- DATE OF BIRTH -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Date of Birth
+                    </span>
+
+                    <strong id="detailDob">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Address
+                    </span>
+
+                    <strong id="detailAddress">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- OCCUPATION -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Occupation
+                    </span>
+
+                    <strong id="detailOccupation">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong id="detailEmail">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Application Date
+                    </span>
+
+                    <strong id="detailDate">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="detail-item detail-full">
+
+                    <span>
+                        Why do they want to join?
+                    </span>
+
+                    <p id="detailReason">
+                        —
+                    </p>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="detailStatus">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+
+                <button type="button" class="admin-btn admin-btn-secondary" id="modalCloseBtn">
+
+                    Close
+
+                </button>
+
+
+                <button type="button" class="admin-btn admin-btn-danger" id="modalRejectBtn">
+
+                    <i class="fas fa-xmark"></i>
+
+                    Reject
+
+                </button>
+
+
+                <button type="button" class="admin-btn admin-btn-primary" id="modalApproveBtn">
+
+                    <i class="fas fa-check"></i>
+
+                    Approve
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script type="module" src="js/join-applications.js"></script>
+
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+</body>
+
+</html>

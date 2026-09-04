@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Members | SKL Yuva Club Admin</title>
+
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- Admin CSS -->
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html" class="active">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Members
+                </h1>
+
+                <p>
+                    Manage SKL Yuva Club members
+                </p>
+
+            </div>
+
+
+            <button type="button" class="admin-btn admin-btn-primary" id="addMemberBtn">
+
+                <i class="fas fa-user-plus"></i>
+
+                Add Member
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================
+             TOOLBAR
+        ====================================== -->
+
+        <div class="admin-toolbar">
+
+            <div class="admin-search">
+
+                <i class="fas fa-search"></i>
+
+                <input type="search" id="memberSearch" placeholder="Search members...">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             TABLE
+        ====================================== -->
+
+        <div class="admin-table-card">
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Member
+                            </th>
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Designation
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="membersTableBody">
+
+                        <tr>
+
+                            <td colspan="5" class="table-loading">
+
+                                <i class="fas fa-spinner fa-spin"></i>
+
+                                Loading members...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         ADD / EDIT MEMBER MODAL
+    ========================================== -->
+
+    <div class="admin-modal" id="memberModal">
+
+        <div class="admin-modal-content">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Add Member
+                    </h2>
+
+                    <p>
+                        Enter member details below.
+                    </p>
+
+                </div>
+
+
+                <button type="button" class="modal-close" id="closeMemberModal">
+
+                    <i class="fas fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="memberForm">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="memberName">
+                        Full Name *
+                    </label>
+
+                    <input type="text" id="memberName" placeholder="Enter full name" required>
+
+                </div>
+
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label for="memberMobile">
+                        Mobile Number *
+                    </label>
+
+                    <input type="tel" id="memberMobile" placeholder="Enter mobile number" maxlength="10" required>
+
+                </div>
+
+
+
+                <!-- DESIGNATION -->
+
+                <div class="form-group">
+
+                    <label for="memberDesignation">
+                        Designation *
+                    </label>
+
+                    <input type="text" id="memberDesignation" placeholder="Example: President" required>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label for="memberStatus">
+                        Status
+                    </label>
+
+                    <select id="memberStatus">
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PHOTO -->
+
+                <div class="form-group">
+
+                    <label for="memberPhoto">
+                        Member Photo
+                    </label>
+
+                    <input type="file" id="memberPhoto" accept="image/*">
+
+                    <small>
+                        JPG, PNG or WEBP image recommended.
+                    </small>
+
+                </div>
+
+
+
+                <!-- PREVIEW -->
+
+                <div class="image-preview" id="memberImagePreview" style="display:none;">
+
+                    <img id="previewImage" src="" alt="Member Preview">
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancelMemberBtn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit" class="admin-btn admin-btn-primary" id="saveMemberBtn">
+
+                        <i class="fas fa-save"></i>
+
+                        Save Member
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script type="module" src="js/members.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+</body>
+
+</html>

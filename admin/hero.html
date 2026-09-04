@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Slider | SKL Yuva Club Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .hero-upload-preview{margin-top:12px;width:100%;max-width:520px;min-height:180px;border:1px dashed #d7dce5;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fafbfc}
+        .hero-upload-preview img{width:100%;max-height:280px;object-fit:cover;display:block}
+        .hero-upload-preview div{display:flex;flex-direction:column;gap:8px;align-items:center;color:#8a93a3;padding:35px}
+        .hero-upload-preview i{font-size:30px}
+        .hero-current-image{width:100px;height:58px;border-radius:8px;object-fit:cover}
+        .file-note{font-size:12px;color:#7b8492;margin-top:6px}
+    </style>
+</head>
+<body>
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html" class="active">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+    <main class="admin-main">
+        <div class="admin-topbar">
+            <div><h1>Hero Slider</h1><p>Manage homepage hero slides</p></div>
+            <button type="button" class="admin-btn admin-btn-primary" id="addHeroBtn">
+                <i class="fas fa-plus"></i> Add Slide
+            </button>
+        </div>
+
+        <div class="admin-toolbar">
+            <div class="admin-search">
+                <i class="fas fa-search"></i>
+                <input type="search" id="heroSearch" placeholder="Search slides...">
+            </div>
+            <select id="heroFilter" class="admin-filter">
+                <option value="all">All Slides</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+
+        <div class="admin-table-card">
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead><tr>
+                        <th>Image</th><th>Title</th><th>Order</th><th>Status</th><th>Actions</th>
+                    </tr></thead>
+                    <tbody id="heroTableBody">
+                        <tr><td colspan="5" class="table-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Loading slides...
+                        </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="admin-modal" id="heroModal">
+        <div class="admin-modal-content">
+            <div class="modal-header">
+                <div><h2 id="heroModalTitle">Add Hero Slide</h2><p>Enter slide details below.</p></div>
+                <button type="button" class="modal-close" id="closeHeroModal"><i class="fas fa-xmark"></i></button>
+            </div>
+
+            <form id="heroForm">
+                <div class="form-group">
+                    <label for="heroImage">Hero Image *</label>
+                    <input type="file" id="heroImage" accept="image/*">
+                    <div class="file-note">Select an image from your computer. Maximum 10 MB.</div>
+                    <div class="hero-upload-preview" id="heroImagePreview">
+                        <div><i class="fas fa-image"></i><span>Image Preview</span></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="heroTitle">Title *</label>
+                    <input type="text" id="heroTitle" required placeholder="Enter slide title">
+                </div>
+
+                <div class="form-group">
+                    <label for="heroDescription">Description</label>
+                    <textarea id="heroDescription" rows="4" placeholder="Enter slide description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="heroButtonText">Button Text</label>
+                    <input type="text" id="heroButtonText" placeholder="e.g. Explore Club">
+                </div>
+
+                <div class="form-group">
+                    <label for="heroButtonLink">Button Link</label>
+                    <input type="text" id="heroButtonLink" placeholder="e.g. about.html">
+                </div>
+
+                <div class="form-group">
+                    <label for="heroOrder">Display Order *</label>
+                    <input type="number" id="heroOrder" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="heroStatus">Status</label>
+                    <select id="heroStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancelHeroBtn">Cancel</button>
+                    <button type="submit" class="admin-btn admin-btn-primary" id="saveHeroBtn">
+                        <i class="fas fa-save"></i> Save Slide
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/hero.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Gallery | SKL Yuva Club Admin
+    </title>
+
+
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- ADMIN CSS -->
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html" class="active">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+
+            <div>
+
+                <h1>
+                    Gallery
+                </h1>
+
+                <p>
+                    Manage SKL Yuva Club gallery
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             ADD / EDIT GALLERY FORM
+        ====================================== -->
+
+        <div class="admin-table-card gallery-form-card">
+
+
+            <!-- FORM HEADER -->
+
+            <div class="gallery-form-header">
+
+                <div>
+
+                    <div class="gallery-form-icon">
+
+                        <i class="fas fa-images"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <h2 id="galleryFormTitle">
+                        Add Gallery Image
+                    </h2>
+
+                    <p id="galleryFormSubtitle">
+                        Add a new image to the club gallery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="galleryForm">
+
+
+                <!-- =================================
+                     TITLE
+                ================================== -->
+
+                <div class="form-group">
+
+                    <label for="galleryTitle">
+
+                        Image Title *
+
+                    </label>
+
+
+                    <input type="text" id="galleryTitle" placeholder="Example: Independence Day Celebration" required>
+
+                </div>
+
+
+
+                <!-- =================================
+                     CAPTION
+                ================================== -->
+
+                <div class="form-group">
+
+                    <label for="galleryCaption">
+
+                        Image Caption
+
+                    </label>
+
+
+                    <textarea id="galleryCaption" rows="4"
+                        placeholder="Write a short description about this image..."></textarea>
+
+
+                    <small>
+                        Write a short description about the event,
+                        activity or moment shown in the photo.
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================
+                     IMAGE
+                ================================== -->
+
+                <div class="form-group">
+
+                    <label for="galleryImage">
+
+                        Image *
+
+                    </label>
+
+
+                    <input type="file" id="galleryImage" accept="image/jpeg,image/png,image/webp">
+
+
+                    <small>
+                        JPG, PNG or WEBP. Maximum 10 MB.
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================
+                     IMAGE PREVIEW
+                ================================== -->
+
+                <div class="gallery-preview-box" id="galleryPreviewBox">
+
+                    <div class="gallery-preview-empty">
+
+                        <i class="fas fa-image"></i>
+
+                        <span>
+                            Image Preview
+                        </span>
+
+                    </div>
+
+
+                    <img id="galleryPreview" src="" alt="Gallery Preview">
+
+                </div>
+
+
+
+                <!-- =================================
+                     BUTTONS
+                ================================== -->
+
+                <div class="form-actions">
+
+
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancelGalleryEditBtn"
+                        style="display:none;">
+
+                        <i class="fas fa-xmark"></i>
+
+                        Cancel Edit
+
+                    </button>
+
+
+                    <button type="submit" class="admin-btn admin-btn-primary" id="uploadGalleryBtn">
+
+                        <i class="fas fa-cloud-arrow-up"></i>
+
+                        Upload Image
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             GALLERY LIST
+        ====================================== -->
+
+        <div class="admin-table-card gallery-list-card">
+
+
+            <!-- HEADER -->
+
+            <div class="gallery-list-header">
+
+
+                <div>
+
+                    <div class="gallery-list-title">
+
+                        <i class="fas fa-photo-film"></i>
+
+                        <div>
+
+                            <h2>
+                                Gallery Images
+                            </h2>
+
+                            <p>
+                                Manage your uploaded gallery photos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-count" id="galleryCount">
+
+                    0 Images
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="gallery-search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input type="search" id="gallerySearch" placeholder="Search gallery images...">
+
+            </div>
+
+
+
+            <!-- GALLERY -->
+
+            <div id="galleryList" class="gallery-admin-grid">
+
+                <div class="gallery-loading">
+
+                    <i class="fas fa-spinner fa-spin"></i>
+
+                    <p>
+                        Loading gallery...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script type="module" src="js/gallery.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+</body>
+
+</html>

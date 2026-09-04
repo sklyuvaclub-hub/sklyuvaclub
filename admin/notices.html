@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notices | SKL Yuva Club Admin</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html" class="active">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Notices
+                </h1>
+
+                <p>
+                    Manage SKL Yuva Club notices
+                </p>
+
+            </div>
+
+
+            <button type="button" class="admin-btn admin-btn-primary" id="addNoticeBtn">
+
+                <i class="fas fa-plus"></i>
+
+                Add Notice
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================
+             TOOLBAR
+        ====================================== -->
+
+        <div class="admin-toolbar">
+
+            <div class="admin-search">
+
+                <i class="fas fa-search"></i>
+
+                <input type="search" id="noticeSearch" placeholder="Search notices...">
+
+            </div>
+
+
+            <select id="noticeFilter" class="admin-filter">
+
+                <option value="all">
+                    All Notices
+                </option>
+
+                <option value="important">
+                    Important
+                </option>
+
+                <option value="normal">
+                    Normal
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- =====================================
+             TABLE
+        ====================================== -->
+
+        <div class="admin-table-card">
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Notice
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="noticesTableBody">
+
+                        <tr>
+
+                            <td colspan="4" class="table-loading">
+
+                                <i class="fas fa-spinner fa-spin"></i>
+
+                                Loading notices...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- BLOG MANAGEMENT -->
+        <div class="admin-topbar" style="margin-top:28px;">
+            <div><h1>Blogs</h1><p>Manage club blog posts</p></div>
+            <button type="button" class="admin-btn admin-btn-primary" id="addBlogBtn"><i class="fas fa-plus"></i> Add Blog</button>
+        </div>
+        <div class="admin-table-card">
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead><tr><th>Blog</th><th>Date</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="blogsTableBody"><tr><td colspan="5" class="table-loading"><i class="fas fa-spinner fa-spin"></i> Loading blogs...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         ADD / EDIT NOTICE MODAL
+    ========================================== -->
+
+    <div class="admin-modal" id="noticeModal">
+
+
+        <div class="admin-modal-content">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Add Notice
+                    </h2>
+
+                    <p>
+                        Enter notice details below.
+                    </p>
+
+                </div>
+
+
+                <button type="button" class="modal-close" id="closeNoticeModal">
+
+                    <i class="fas fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="noticeForm">
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label for="noticeTitle">
+
+                        Notice Title *
+
+                    </label>
+
+                    <input type="text" id="noticeTitle" placeholder="Enter notice title" required>
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="noticeDescription">
+
+                        Notice Description *
+
+                    </label>
+
+                    <textarea id="noticeDescription" rows="6" placeholder="Write notice details here..."
+                        required></textarea>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="noticeDate">
+
+                        Notice Date *
+
+                    </label>
+
+                    <input type="date" id="noticeDate" required>
+
+                </div>
+
+
+
+                <!-- PRIORITY -->
+
+                <div class="form-group">
+
+                    <label for="noticePriority">
+
+                        Priority
+
+                    </label>
+
+                    <select id="noticePriority">
+
+                        <option value="normal">
+                            Normal
+                        </option>
+
+                        <option value="important">
+                            Important
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancelNoticeBtn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit" class="admin-btn admin-btn-primary" id="saveNoticeBtn">
+
+                        <i class="fas fa-save"></i>
+
+                        Save Notice
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- BLOG MODAL -->
+    <div class="admin-modal" id="blogModal">
+        <div class="admin-modal-content">
+            <div class="modal-header"><div><h2 id="blogModalTitle">Add Blog</h2><p>Enter blog details below.</p></div><button type="button" class="modal-close" id="closeBlogModal"><i class="fas fa-xmark"></i></button></div>
+            <form id="blogForm">
+                <div class="form-group"><label for="blogTitle">Blog Title *</label><input type="text" id="blogTitle" required></div>
+                <div class="form-group"><label for="blogImage">Blog Photo</label><input type="file" id="blogImage" accept="image/*"><small>Upload image like Gallery.</small></div>
+                <div class="form-group"><label for="blogContent">Full Content *</label><textarea id="blogContent" rows="8" required></textarea></div>
+                <div class="form-group"><label for="blogDate">Date *</label><input type="date" id="blogDate" required></div>
+                <div class="form-group"><label for="blogAuthor">Author (Optional)</label><input type="text" id="blogAuthor"></div>
+                <div class="form-group"><label for="blogOrder">Order</label><input type="number" id="blogOrder" value="0" min="0"></div>
+                <div class="form-group"><label for="blogStatus">Status</label><select id="blogStatus"><option value="true">Active</option><option value="false">Inactive</option></select></div>
+                <div class="form-actions"><button type="button" class="admin-btn admin-btn-secondary" id="cancelBlogBtn">Cancel</button><button type="submit" class="admin-btn admin-btn-primary"><i class="fas fa-save"></i> Save Blog</button></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script type="module" src="js/notices.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+
+</body>
+
+</html>

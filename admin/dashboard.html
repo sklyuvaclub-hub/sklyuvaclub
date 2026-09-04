@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | SKL Yuva Club Admin</title>
+
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- Admin CSS -->
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html" class="active">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Welcome to SKL Yuva Club Admin Panel
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <button type="button" class="admin-btn admin-btn-primary" id="websiteBtn">
+
+                    <i class="fas fa-globe"></i>
+
+                    View Website
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STAT CARDS
+        ====================================== -->
+
+        <section class="dashboard-stats">
+
+
+            <!-- MEMBERS -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+
+                    <i class="fas fa-users"></i>
+
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Members
+                    </p>
+
+                    <h2 id="totalMembers">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- GALLERY -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+
+                    <i class="fas fa-images"></i>
+
+                </div>
+
+                <div>
+
+                    <p>
+                        Gallery Photos
+                    </p>
+
+                    <h2 id="totalGallery">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- EVENTS -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+
+                    <i class="fas fa-calendar-days"></i>
+
+                </div>
+
+                <div>
+
+                    <p>
+                        Events
+                    </p>
+
+                    <h2 id="totalEvents">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTICES -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+
+                    <i class="fas fa-bullhorn"></i>
+
+                </div>
+
+                <div>
+
+                    <p>
+                        Notices
+                    </p>
+
+                    <h2 id="totalNotices">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             BIRTHDAY REMINDERS
+        ====================================== -->
+
+        <section class="dashboard-section birthday-section" id="birthdayRemindersSection">
+
+            <div class="section-heading">
+                <div>
+                    <h2><i class="fas fa-cake-candles"></i> Birthday Reminders</h2>
+                    <p>Reminder on the birthday and 7 days before the birthday.</p>
+                </div>
+            </div>
+
+            <div id="birthdayReminders" class="birthday-reminders">
+                <div class="birthday-empty">
+                    <i class="fas fa-spinner fa-spin"></i> Loading birthday list...
+                </div>
+            </div>
+            <div class="birthday-calendar-wrap">
+                <h3><i class="fas fa-calendar-alt"></i> All Members — Month-wise Birthday List</h3>
+                <div id="birthdayMonthList" class="birthday-month-list">
+                    <div class="birthday-empty"><i class="fas fa-spinner fa-spin"></i> Loading all birthdays...</div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Manage your website content quickly.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            
+            <div class="quick-actions">
+
+                <a href="members.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-user-plus"></i></div>
+                    <div><h3>Manage Members</h3><p>Add, edit and remove club members.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="gallery.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-camera"></i></div>
+                    <div><h3>Manage Gallery</h3><p>Manage club photos and gallery.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="events.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-calendar-plus"></i></div>
+                    <div><h3>Manage Events</h3><p>Create and manage club events.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="notices.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-bell"></i></div>
+                    <div><h3>Manage Notices</h3><p>Publish and manage announcements.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="hero.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-panorama"></i></div>
+                    <div><h3>Manage Hero Slider</h3><p>Manage homepage slider images and content.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="join-applications.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-user-plus"></i></div>
+                    <div><h3>Join Requests</h3><p>View and manage membership applications.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="settings.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-gear"></i></div>
+                    <div><h3>Settings</h3><p>Update club and website information.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="../index.html" class="quick-action-card">
+                    <div class="quick-action-icon"><i class="fas fa-globe"></i></div>
+                    <div><h3>View Website</h3><p>Open the public SKL Yuva Club website.</p></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ADMIN INFORMATION
+        ====================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="admin-info-card">
+
+
+                <div class="admin-info-icon">
+
+                    <i class="fas fa-shield-halved"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Admin Control Center
+                    </h2>
+                    <p>
+                        From this admin panel, you can manage
+                        members, gallery, events and notices
+                        of Shaheed Krishan Lal Yuva Club.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+</body>
+
+</html>

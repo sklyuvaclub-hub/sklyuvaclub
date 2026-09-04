@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | SKL Yuva Club</title>
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body class="admin-login-page">
+
+
+    <!-- =====================================
+         LOGIN WRAPPER
+    ====================================== -->
+
+    <main class="login-wrapper">
+
+
+        <!-- =================================
+             LOGIN CARD
+        ================================== -->
+
+        <div class="login-card">
+
+
+            <!-- LOGO -->
+
+            <div class="login-logo">
+
+                <img src="../assets/images/logo.png" alt="SKL Yuva Club Logo">
+
+            </div>
+
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <h1>
+                    Admin Panel
+                </h1>
+
+                <p>
+                    Shaheed Krishan Lal Yuva Club
+                </p>
+
+            </div>
+
+
+            <!-- =================================
+                 LOGIN FORM
+            ================================== -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="login-field">
+
+                    <label for="username">
+                        Email Address
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-envelope"></i>
+
+
+                        <input type="email" id="username" placeholder="Enter admin email" autocomplete="email" required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-lock"></i>
+
+
+                        <input type="password" id="password" placeholder="Enter password"
+                            autocomplete="current-password" required>
+
+
+                        <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">
+
+                            <i class="fas fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button type="submit" class="login-btn">
+
+                    <i class="fas fa-right-to-bracket"></i>
+
+                    <span>
+                        Login to Admin Panel
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- BACK TO WEBSITE -->
+
+            <a href="../index.html" class="back-website">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to Website
+
+            </a>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================
+         FIREBASE LOGIN JS
+    ====================================== -->
+
+    <script type="module" src="js/login.js"></script>
+
+
+</body>
+
+</html>

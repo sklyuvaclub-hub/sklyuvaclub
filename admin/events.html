@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Events | SKL Yuva Club Admin</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+     SIDEBAR
+========================================= -->
+
+    <aside class="admin-sidebar">
+
+    <div class="admin-logo">
+        <img src="../assets/images/logo.png" alt="SKL Yuva Club">
+        <h2>SKL Admin</h2>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="members.html">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="events.html" class="active">
+            <i class="fas fa-calendar-days"></i>
+            <span>Events</span>
+        </a>
+
+        <a href="notices.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Notices</span>
+        </a>
+
+        <a href="hero.html">
+            <i class="fas fa-panorama"></i>
+            <span>Hero Slider</span>
+        </a>
+
+        <a href="join-applications.html">
+            <i class="fas fa-user-plus"></i>
+            <span>Join Applications</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="../index.html">
+            <i class="fas fa-globe"></i>
+            <span>View Website</span>
+        </a>
+
+        <a href="#" id="logoutBtn">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+    </nav>
+</aside>
+
+
+
+    <!-- =========================================
+     MAIN
+========================================= -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Events
+                </h1>
+
+                <p>
+                    Manage SKL Yuva Club events
+                </p>
+
+            </div>
+
+
+            <button type="button" class="admin-btn admin-btn-primary" id="addEventBtn">
+
+                <i class="fas fa-calendar-plus"></i>
+
+                Add Event
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================================
+         SEARCH
+    ========================================== -->
+
+        <div class="admin-toolbar">
+
+            <div class="admin-search">
+
+                <i class="fas fa-search"></i>
+
+                <input type="search" id="eventSearch" placeholder="Search events...">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+         TABLE
+    ========================================== -->
+
+        <div class="admin-table-card">
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Event
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Time
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="eventsTableBody">
+
+                        <tr>
+
+                            <td colspan="5" class="table-loading">
+
+                                <i class="fas fa-spinner fa-spin"></i>
+
+                                Loading events...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+     EVENT MODAL
+========================================= -->
+
+    <div class="admin-modal" id="eventModal">
+
+        <div class="admin-modal-content">
+
+
+            <!-- HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Add Event
+                    </h2>
+
+                    <p>
+                        Enter event details below.
+                    </p>
+
+                </div>
+
+
+                <button type="button" class="modal-close" id="closeEventModal">
+
+                    <i class="fas fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="eventForm">
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label for="eventTitle">
+                        Event Title *
+                    </label>
+
+                    <input type="text" id="eventTitle" placeholder="Example: Cricket Tournament 2026" required>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="eventDate">
+                        Event Date *
+                    </label>
+
+                    <input type="date" id="eventDate" required>
+
+                </div>
+
+
+
+                <!-- TIME -->
+
+                <div class="form-group">
+
+                    <label for="eventTime">
+                        Event Time
+                    </label>
+
+                    <input type="time" id="eventTime">
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="eventLocation">
+                        Location
+                    </label>
+
+                    <input type="text" id="eventLocation" placeholder="Example: Shaheed Krishan Lal Stadium">
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="eventDescription">
+                        Description
+                    </label>
+
+                    <textarea id="eventDescription" rows="4"
+                        placeholder="Write something about this event..."></textarea>
+
+                </div>
+
+
+
+                <!-- IMAGE URL -->
+
+                <div class="form-group">
+
+                    <label for="eventImage">
+                        Event Image URL
+                    </label>
+
+                    <input type="url" id="eventImage" placeholder="Paste image URL here">
+
+                    <small>
+                        Example:
+                        https://example.com/event.jpg
+                    </small>
+
+                </div>
+
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div class="image-preview" id="eventImagePreview" style="display:none;">
+
+                    <img id="eventPreviewImage" src="" alt="Event Preview">
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancelEventBtn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit" class="admin-btn admin-btn-primary" id="saveEventBtn">
+
+                        <i class="fas fa-save"></i>
+
+                        Save Event
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+    <script type="module" src="js/events.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+
+
+</body>
+
+</html>

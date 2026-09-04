@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | Shaheed Krishan Lal Yuva Club</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <!-- Gallery CSS -->
+
+    <style>
+        /* =========================================
+           PUBLIC GALLERY PAGE
+        ========================================= */
+
+        .gallery-page {
+            padding: 90px 0 100px;
+            background: #f7f9fc;
+        }
+
+
+        .gallery-page .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+
+        .gallery-page .section-title h2 {
+            font-size: 42px;
+            margin: 15px 0;
+            color: #222;
+        }
+
+
+        .gallery-page .section-title p {
+            max-width: 700px;
+            margin: auto;
+            color: #666;
+        }
+
+
+        /* SEARCH */
+
+        .gallery-toolbar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+
+        .gallery-search {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+
+        .gallery-search i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+
+        .gallery-search input {
+            width: 100%;
+            padding: 15px 20px 15px 48px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+            background: #fff;
+        }
+
+
+        .gallery-search input:focus {
+            border-color: #ff6b00;
+        }
+
+
+        /* GRID */
+
+        .public-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+
+        /* CARD */
+
+        .public-gallery-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            transition: .3s ease;
+        }
+
+
+        .public-gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
+        }
+
+
+        /* IMAGE */
+
+        .public-gallery-image {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+
+        .public-gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: .5s ease;
+        }
+
+
+        .public-gallery-card:hover .public-gallery-image img {
+            transform: scale(1.08);
+        }
+
+
+        /* IMAGE OVERLAY */
+
+        .public-gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: .3s ease;
+        }
+
+
+        .public-gallery-image:hover .public-gallery-overlay {
+            opacity: 1;
+        }
+
+
+        .public-gallery-overlay i {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ff6b00;
+            color: #fff;
+            font-size: 20px;
+        }
+
+
+        /* CONTENT */
+
+        .public-gallery-content {
+            padding: 20px;
+        }
+
+
+        .public-gallery-content h3 {
+            margin: 0 0 10px;
+            font-size: 19px;
+            color: #222;
+        }
+
+
+        .public-gallery-content p {
+            margin: 0;
+            color: #666;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+
+        /* LOADING */
+
+        .public-gallery-loading,
+        .public-gallery-empty,
+        .public-gallery-error {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 70px 20px;
+            color: #666;
+        }
+
+
+        .public-gallery-loading i,
+        .public-gallery-empty i,
+        .public-gallery-error i {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #ff6b00;
+        }
+
+
+        .public-gallery-empty h3,
+        .public-gallery-error h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+
+        /* =========================================
+           LIGHTBOX
+        ========================================= */
+
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .88);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 30px;
+        }
+
+
+        .gallery-lightbox.show {
+            display: flex;
+        }
+
+
+        .lightbox-content {
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            position: relative;
+            text-align: center;
+        }
+
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+
+        .lightbox-info {
+            color: #fff;
+            margin-top: 15px;
+        }
+
+
+        .lightbox-info h3 {
+            margin: 0 0 7px;
+            font-size: 22px;
+        }
+
+
+        .lightbox-info p {
+            margin: 0;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+
+        .lightbox-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #ff6b00;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 991px) {
+
+            .public-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .gallery-page {
+                padding: 60px 0 70px;
+            }
+
+
+            .gallery-page .section-title h2 {
+                font-size: 32px;
+            }
+
+
+            .public-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .public-gallery-image {
+                height: 240px;
+            }
+
+
+            .gallery-lightbox {
+                padding: 15px;
+            }
+
+
+            .lightbox-content img {
+                max-height: 60vh;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body class="inner-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header id="header">
+
+        <div class="container">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html" class="logo">
+
+                <img src="assets/images/logo.png" alt="SKL Logo">
+
+                <div class="logo-text">
+
+                    <h2>SKL Yuva Club</h2>
+
+                    <span>Ekta • Seva • Samarpan</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav id="navbar">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="members.html">
+                    Members
+                </a>
+
+                <a href="gallery.html" class="active">
+                    Gallery
+                </a>
+
+                <a href="events.html">
+                    Events
+                </a>
+
+                <a href="notices.html">
+                    Notices
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- MOBILE MENU -->
+
+            <div class="menu-btn" id="menuBtn">
+
+                <i class="fas fa-bars"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HEADER END ================= -->
+
+
+    <!-- ================= PAGE HERO ================= -->
+
+    <section class="page-hero">
+
+        <div class="container">
+
+            <span class="section-tag">
+                OUR MEMORIES
+            </span>
+
+            <h1>
+                Photo Gallery
+            </h1>
+
+            <p>
+                Explore memorable moments and activities of
+                Shaheed Krishan Lal Yuva Club.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PAGE HERO END ================= -->
+
+
+    <!-- ================= GALLERY ================= -->
+
+    <section class="gallery-page">
+
+        <div class="container">
+
+
+            <div class="section-title">
+
+                <span class="section-tag">
+                    SKL YUVA CLUB
+                </span>
+
+                <h2>
+                    Our Gallery
+                </h2>
+
+                <p>
+                    Some beautiful memories from our social,
+                    sports and community activities.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="gallery-toolbar">
+
+                <div class="gallery-search">
+
+                    <i class="fas fa-search"></i>
+
+                    <input type="search" id="gallerySearch" placeholder="Search gallery...">
+
+                </div>
+
+            </div>
+
+
+            <!-- FIREBASE GALLERY -->
+
+            <div class="public-gallery-grid" id="publicGalleryContainer">
+
+                <div class="public-gallery-loading">
+
+                    <i class="fas fa-spinner fa-spin"></i>
+
+                    <h3>
+                        Loading Gallery...
+                    </h3>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GALLERY END ================= -->
+
+
+    <!-- ================= LIGHTBOX ================= -->
+
+    <div class="gallery-lightbox" id="galleryLightbox">
+
+        <div class="lightbox-content">
+
+
+            <button type="button" class="lightbox-close" id="lightboxClose">
+
+                <i class="fas fa-xmark"></i>
+
+            </button>
+
+
+            <img id="lightboxImage" src="" alt="Gallery Image">
+
+
+            <div class="lightbox-info">
+
+                <h3 id="lightboxTitle">
+                </h3>
+
+                <p id="lightboxCaption">
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+
+                <!-- ABOUT -->
+
+                <div class="footer-box">
+
+                    <img data-setting="logoUrl" src="assets/images/logo.png" class="footer-logo" alt="SKL Yuva Club Logo">
+
+                    <h3>
+                        Shaheed Krishan Lal Yuva Club
+                    </h3>
+
+                    <p>
+                        Unity • Service • Dedication
+                    </p>
+
+                    <p class="footer-description">
+                        Working together for youth development,
+                        social service, sports and community welfare.
+                    </p>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="footer-box">
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="members.html">
+                                Members
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="gallery.html">
+                                Gallery
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="events.html">
+                                Events
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="footer-box">
+
+                    <h3>
+                        Contact Us
+                    </h3>
+
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <span data-setting="clubPhone">+91 XXXXXXXXXX</span>
+                    </p>
+
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <span data-setting="clubEmail">sklyuvaclub@gmail.com</span>
+                    </p>
+
+                    <p>
+                        <i class="fas fa-location-dot"></i>
+                        <span data-setting="clubAddress">Barog, Solan (H.P.)</span>
+                    </p>
+
+                </div>
+
+
+                <!-- SOCIAL -->
+
+                <div class="footer-box">
+
+                    <h3>
+                        Follow Us
+                    </h3>
+
+                    <p>
+                        Stay connected with SKL Yuva Club.
+                    </p>
+
+                    <div class="footer-social">
+
+                        <a data-setting="facebook" href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a data-setting="instagram" href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="#" data-setting="whatsapp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+
+                        <a data-setting="youtube" href="#" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER BOTTOM -->
+
+            <div class="footer-bottom">
+
+                <p>
+
+                    ©
+                    <span id="year"></span>
+
+                    Shaheed Krishan Lal Yuva Club.
+
+                    All Rights Reserved.
+
+                </p>
+
+                <p>
+                    Designed with ❤️ for SKL Yuva Club
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= FLOATING BUTTONS ================= -->
+
+    <div class="floating-buttons">
+
+
+        <a href="#" data-setting="whatsapp" class="float-btn whatsapp" aria-label="WhatsApp" target="_blank">
+
+            <i class="fab fa-whatsapp"></i>
+
+        </a>
+
+
+        <a href="#" data-setting-phone class="float-btn call" aria-label="Call">
+
+            <i class="fas fa-phone"></i>
+
+        </a>
+
+
+        <button type="button" class="float-btn top-btn" id="backToTop" aria-label="Back to top">
+
+            <i class="fas fa-arrow-up"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script type="module" src="assets/js/app.js"></script>
+
+
+    <script type="module" src="assets/js/gallery.js"></script>
+
+
+<script type="module">import { loadSiteSettings } from "./assets/js/settings-loader.js"; loadSiteSettings();</script>
+</body>
+
+</html>
