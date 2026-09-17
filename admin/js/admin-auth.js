@@ -107,4 +107,60 @@ if (logoutBtn) {
         }
     );
 
+}// =========================================================
+// AUTO LOGOUT AFTER 30 MINUTES OF INACTIVITY
+// =========================================================
+
+const AUTO_LOGOUT_TIME = 30 * 60 * 1000;
+
+let inactivityTimer;
+
+function resetInactivityTimer() {
+
+    clearTimeout(inactivityTimer);
+
+    inactivityTimer = setTimeout(async () => {
+
+        try {
+
+            await signOut(auth);
+
+            alert(
+                "You have been logged out due to 30 minutes of inactivity."
+            );
+
+            window.location.replace(loginPage);
+
+        } catch (error) {
+
+            console.error(
+                "Auto Logout Error:",
+                error
+            );
+
+        }
+
+    }, AUTO_LOGOUT_TIME);
 }
+
+
+// Reset timer whenever admin is active
+[
+    "click",
+    "mousemove",
+    "keydown",
+    "scroll",
+    "touchstart"
+].forEach((eventName) => {
+
+    document.addEventListener(
+        eventName,
+        resetInactivityTimer,
+        { passive: true }
+    );
+
+});
+
+
+// Start the 30-minute timer
+resetInactivityTimer();
